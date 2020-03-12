@@ -1,6 +1,6 @@
 # Plotting the plots and loss curves
 # Refer to the Notebook 'AutoEncodersAtlasDataCompression2.ipynb' if any doubts
-
+# Plotting the loss curve
 qw=b['Epoch']
 qe=b['train_loss']
 qr=b['val_loss']
@@ -12,8 +12,9 @@ plt.ylabel('loss')
 plt.title('Reconstruction Loss Curve')
 plt.savefig('reconstruction_loss.png',dpi=500,bbox_inches='tight')
 
+# Evaluation of the model architecture
 model.eval()
-
+# printing the input and output values for comparison
 print('Comparing input and output:')
 for ii in np.arange(90, 105):
     data = valid_ds.tensors[0][ii]
@@ -21,14 +22,14 @@ for ii in np.arange(90, 105):
     print('Inp:', data)
     print('Out:', pred)
     print(' ')
-
+# Unnormalization 
 aa=[]
 ab=[]
 for each in valid_ds.tensors[0]:
     aa.append((each*train_std)+train_mean)
     c=(model(each)).detach().numpy()
     ab.append((c*train_std)+train_mean)
-
+# List are being appended for being used in plotting
 ac=[]
 ad=[]
 ae=[]
@@ -48,7 +49,7 @@ while(i<len(aa)):
     ai.append(aa[i][3])
     aj.append(ab[i][3])
     i+=1
-
+# Standards used for graphs
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import r2_score
 from statistics import mean
@@ -62,7 +63,7 @@ SUB = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
 a="R2".translate(SUP)
 c="0C".translate(SUP)
 title_font = {'fontname':'Arial', 'size':'16', 'color':'black'}
-
+# Regression plot for parameter- m
 fig, ax = plt.subplots()
 data1=ac
 data2=ad
@@ -84,7 +85,7 @@ ax.text(10,60000,str(a)+'='+str(round(r2_score(data1,data2),3)))
 ax.text(10,70000,'MAE='+str(round(mean_absolute_error(data1,data2),3)))
 plt.savefig('RegressionPlotm.png',dpi=500,bbox_inches='tight')
 plt.show()
-
+# Regression plot for parameter - pt
 fig, ax = plt.subplots()
 data1=ae
 data2=af
@@ -106,7 +107,7 @@ ax.text(10,500000,str(a)+'='+str(round(r2_score(data1,data2),3)))
 ax.text(10,400000,'MAE='+str(round(mean_absolute_error(data1,data2),3)))
 plt.savefig('RegressionPlotpt.png',dpi=500,bbox_inches='tight')
 plt.show()
-
+# Regression plot for parameter - phi
 fig, ax = plt.subplots()
 data1=ag
 data2=ah
@@ -129,7 +130,7 @@ ax.text(-3,2,str(a)+'='+str(round(r2_score(data1,data2),3)))
 ax.text(-3,1.5,'MAE='+str(round(mean_absolute_error(data1,data2),3)))
 plt.savefig('Regressionplotphi.png',dpi=500)
 plt.show()
-
+# Regression plot for parameter - eta
 fig, ax = plt.subplots()
 data1=ai
 data2=aj
@@ -153,6 +154,7 @@ ax.text(-4.5,1.4,'MAE='+str(round(mean_absolute_error(data1,data2),3)))
 plt.savefig('Regressionploteta.png',dpi=500,bbox_inches='tight')
 plt.show()
 
+# Lists being appended for relative difference value plots
 ma=[]
 mb=[]
 md=[]
@@ -167,48 +169,56 @@ while(po<len(ac)):
     mb.append(po)
     po+=1
 
+# Relative difference value plot for parameter- m    
 plt.plot(mb,ma)
 plt.xlabel('ith value')
 plt.ylabel('Relative difference between estimated and original value')
 plt.title('Plot for parameter - m')
 plt.savefig('Relativediferrenceplotm.png',dpi=500,bbox_inches='tight')
 
+#Histogram for parameter - m
 plt.hist(ma)
 plt.ylabel('Frequency')
 plt.xlabel('Relative difference value')
 plt.title('Histogram for Relative Difference values in m')
 plt.savefig('Relativedifferencevalueshistogramm.png',dpi=500,bbox_inches='tight')
 
+#Relative difference value plot for parameter - pt
 plt.plot(mb,mc)
 plt.xlabel('ith value')
 plt.ylabel('Relative difference between estimated and original value')
 plt.title('Plot for parameter - pt')
 plt.savefig('Relativedifferencevaluespt.png',dpi=500,bbox_inches='tight')
 
+#Histogram for parameter- pt
 plt.hist(mc)
 plt.ylabel('Frequency')
 plt.xlabel('Relative difference value')
 plt.title('Histogram for Relative Difference values in pt')
 plt.savefig('Relativedifferencevaluespthist.png',dpi=500,bbox_inches='tight')
 
+#Relative difference value plot for parameter - phi
 plt.plot(mb,md)
 plt.xlabel('ith value')
 plt.ylabel('Relative difference between estimated and original value')
 plt.title('Plot for parameter - phi')
 plt.savefig('Relativedifferencevaluesphi.png',dpi=500,bbox_inches='tight')
 
+#Histogram for phi
 plt.hist(md)
 plt.ylabel('Frequency')
 plt.xlabel('Relative difference value')
 plt.title('Histogram for Relative Difference values in phi')
 plt.savefig('Relativedifferencevaluesphihist.png',dpi=500,bbox_inches='tight')
 
+#Relative difference value plot in eta
 plt.plot(mb,me)
 plt.xlabel('ith value')
 plt.ylabel('Relative difference between estimated and original value')
 plt.title('Plot for parameter - eta')
 plt.savefig('Relativedifferencevalueseta.png',dpi=500,bbox_inches='tight')
 
+#Histogram for eta
 plt.hist(me)
 plt.ylabel('Frequency')
 plt.xlabel('Relative difference value')
