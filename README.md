@@ -5,13 +5,13 @@ The given repository uses deep autoencoders for compressing data of ATLAS large 
 all_jets_test_4D_100_percent.pkl and all_jets_train_4D_100_percent.pkl are the testing and training datasets or you can say validation and training. 
 These datasets are loaded into the notebook by the help of pandas library. You can find it in the Preprocessing.py file.
 
-##Neural net
+## Neural net
 The neural net is located in the model.py. I have tested a lot of neural nets by varying the activation functions for each of them and have put the most accurate model on the basis of r2_score and mean absolute error.
 
 ## Preprocessing of the data
 The data has to be normalized and converted to tensor form before passing it through the model. This can be executed by preprocessing.py
 
-##Training and Validation
+## Training and Validation
 Model can be trained using Training and validation.py.
 
 # How to run the files 
