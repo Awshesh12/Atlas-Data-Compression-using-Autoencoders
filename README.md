@@ -1,5 +1,5 @@
 # Atlas-Data-Compression-using-Autoencoders
-The given repository uses deep autoencoders for compressing data of ATLAS large hadron collider from 4 variables to 3 variables.
+The given repository uses deep autoencoders for compressing data of ATLAS large hadron collider from 4 variables to 3 variables. The major objective of the project is to reduce computational resources as well as solve the problem of data redundancy.
 
 ## Dataset
 all_jets_test_4D_100_percent.pkl and all_jets_train_4D_100_percent.pkl are the testing and training datasets or you can say validation and training. 
